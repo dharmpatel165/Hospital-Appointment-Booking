@@ -1,0 +1,27 @@
+{
+  "name": "hospital-appointment-booking",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "setup": "node database/setup.js",
+    "seed": "node database/seed.js",
+    "crud": "node database/crud.js",
+    "aggregation": "node database/aggregation.js",
+    "references": "node database/references.js",
+    "indexes": "node database/indexes.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.5",
+    "express": "^5.2.1",
+    "mongodb": "^7.7.0"
+  }
+}

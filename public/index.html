@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Hospital Appointment Booking
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- LOGIN / REGISTER -->
+
+    <div id="authPage">
+
+        <div class="auth-box">
+
+            <h1>
+                Hospital Appointment Booking
+            </h1>
+
+            <div class="tabs">
+
+                <button
+                    onclick="showLogin()"
+                >
+                    Login
+                </button>
+
+                <button
+                    onclick="showRegister()"
+                >
+                    Register
+                </button>
+
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <div id="loginForm">
+
+                <h2>Login</h2>
+
+                <input
+                    id="loginEmail"
+                    type="email"
+                    placeholder="Email"
+                >
+
+                <input
+                    id="loginPassword"
+                    type="password"
+                    placeholder="Password"
+                >
+
+                <button
+                    onclick="login()"
+                >
+                    Login
+                </button>
+
+                <p id="loginMessage"></p>
+
+            </div>
+
+
+            <!-- REGISTER -->
+
+            <div
+                id="registerForm"
+                class="hidden"
+            >
+
+                <h2>Patient Registration</h2>
+
+                <input
+                    id="regName"
+                    placeholder="Full Name"
+                >
+
+                <input
+                    id="regEmail"
+                    type="email"
+                    placeholder="Email"
+                >
+
+                <input
+                    id="regPassword"
+                    type="password"
+                    placeholder="Password"
+                >
+
+                <input
+                    id="regPhone"
+                    placeholder="Phone"
+                >
+
+                <input
+                    id="regAge"
+                    type="number"
+                    placeholder="Age"
+                >
+
+                <select id="regGender">
+
+                    <option value="">
+                        Select Gender
+                    </option>
+
+                    <option value="Male">
+                        Male
+                    </option>
+
+                    <option value="Female">
+                        Female
+                    </option>
+
+                </select>
+
+                <input
+                    id="regAddress"
+                    placeholder="Address"
+                >
+
+                <input
+                    id="regBlood"
+                    placeholder="Blood Group"
+                >
+
+                <button
+                    onclick="registerPatient()"
+                >
+                    Register
+                </button>
+
+                <p id="registerMessage"></p>
+
+            </div>
+
+
+            <p class="demo">
+                Demo Login: admin@hospital.com / 1234
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- DASHBOARD -->
+
+    <div
+        id="dashboardPage"
+        class="hidden"
+    >
+
+        <header>
+
+            <h1>
+                Hospital Appointment Booking System
+            </h1>
+
+            <button
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </header>
+
+
+        <main class="container">
+
+            <h2 id="welcome"></h2>
+
+
+            <!-- DASHBOARD CARDS -->
+
+            <div class="dashboard">
+
+                <div class="card">
+
+                    <h2 id="patientCount">
+                        0
+                    </h2>
+
+                    <p>
+                        Total Patients
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h2 id="doctorCount">
+                        0
+                    </h2>
+
+                    <p>
+                        Total Doctors
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h2 id="appointmentCount">
+                        0
+                    </h2>
+
+                    <p>
+                        Total Appointments
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h2 id="slotCount">
+                        0
+                    </h2>
+
+                    <p>
+                        Available Slots
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOOK APPOINTMENT -->
+
+            <div class="section">
+
+                <h2>
+                    Book Appointment
+                </h2>
+
+                <div class="form-grid">
+
+                    <select
+                        id="patientSelect"
+                    >
+
+                        <option value="">
+                            Select Patient
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        id="doctorSelect"
+                        onchange="filterSchedules()"
+                    >
+
+                        <option value="">
+                            Select Doctor
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        id="scheduleSelect"
+                    >
+
+                        <option value="">
+                            Select Available Schedule
+                        </option>
+
+                    </select>
+
+
+                    <input
+                        id="reason"
+                        placeholder="Reason for appointment"
+                    >
+
+                </div>
+
+
+                <button
+                    onclick="bookAppointment()"
+                >
+                    Book Appointment
+                </button>
+
+                <p id="bookingMessage"></p>
+
+            </div>
+
+
+            <!-- DOCTORS -->
+
+            <div class="section">
+
+                <h2>
+                    Doctors
+                </h2>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Specialization</th>
+                            <th>Department</th>
+                            <th>Experience</th>
+                            <th>Fee</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody
+                        id="doctorTable"
+                    ></tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- APPOINTMENTS -->
+
+            <div class="section">
+
+                <h2>
+                    Appointments
+                </h2>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Patient</th>
+                            <th>Doctor</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody
+                        id="appointmentTable"
+                    ></tbody>
+
+                </table>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
