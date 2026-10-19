@@ -432,16 +432,21 @@ async function seedDatabase() {
 
         const schedules = [];
 
-        for (let i = 1; i <= 15; i++) {
+        for (let i = 1; i <= 50; i++) {
 
             const doctorNumber = ((i - 1) % 8) + 1;
 
             schedules.push({
-                _id: `S${String(i).padStart(3, "0")}`,
-                doctor_id:
-                    `DOC${String(doctorNumber).padStart(3, "0")}`,
-                date:
-                    `2026-10-${String(10 + i).padStart(2, "0")}`,
+    _id: `S${String(i).padStart(3, "0")}`,
+    doctor_id: `DOC${String(doctorNumber).padStart(3, "0")}`,
+    date: (() => {
+        const date = new Date(2026, 9, 10 + i);
+        return [
+            date.getFullYear(),
+            String(date.getMonth() + 1).padStart(2, "0"),
+            String(date.getDate()).padStart(2, "0")
+        ].join("-");
+    })(),
                 start_time:
                     i % 2 === 0 ? "11:00" : "10:00",
                 end_time:
@@ -513,7 +518,15 @@ async function seedDatabase() {
         console.log("Departments:", departments.length);
         console.log("Schedules:", schedules.length);
         console.log("Appointments:", appointments.length);
-        console.log("TOTAL RECORDS:", 68);
+        console.log(
+    "TOTAL RECORDS:",
+    users.length +
+    patients.length +
+    doctors.length +
+    departments.length +
+    schedules.length +
+    appointments.length
+);
         console.log("================================");
 
     } catch (error) {
